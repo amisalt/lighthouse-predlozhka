@@ -17,3 +17,10 @@ bot.use(async(ctx)=>{
 bot.launch().then(()=>console.log("STARTED"))
 process.once("SIGINT", ()=>bot.stop("SIGINT"))
 process.once("SIGTERM", ()=>bot.stop("SIGTERM"))
+
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
