@@ -6,7 +6,7 @@ app.use(express.static('static'))
 app.use(express.json());
 
 const {Telegraf, Markup} = require('telegraf')
-const {message} = require("telegraf/filters")
+const {message, channelPost} = require("telegraf/filters")
 const bot = new Telegraf(process.env.BOT_API_KEY)
 
 app.use(bot.webhookCallback(`/${process.env.SECRET_PATH}`))
@@ -14,7 +14,7 @@ bot.telegram.setWebhook(`https://lighthouse-predlozhka.onrender.com/${process.en
 
 bot.use(async(ctx, next)=>{
   //USER RELATED INTERFACE
-  if(ctx.update.message.chat.id !== process.env.ADMIN_CHAT_ID || ctx.update.message.chat.id !== process.env.CHANNEL_CHAT_ID){
+  if(ctx.update?.message?.chat?.id !== process.env.ADMIN_CHAT_ID || ctx?.update?.message?.chat?.id !== process.env.CHANNEL_CHAT_ID || !ctx.has('channel_post')){
     ctx.update.ADMIN = false
   }
   //NURYM RELATED INTERFACE
