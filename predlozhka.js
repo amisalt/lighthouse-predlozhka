@@ -21,8 +21,8 @@ const {message, channelPost} = require("telegraf/filters")
 const bot = new Telegraf(BOT_API_KEY)
 
 
-// app.use(bot.webhookCallback(`/${SECRET_PATH}`))
-// bot.telegram.setWebhook(`https://lighthouse-predlozhka.onrender.com/${SECRET_PATH}`)
+app.use(bot.webhookCallback(`/${SECRET_PATH}`))
+bot.telegram.setWebhook(`https://lighthouse-predlozhka.onrender.com/${SECRET_PATH}`)
 
 bot.use(async(ctx, next)=>{
   if(ctx.update?.message?.chat?.id === ADMIN_CHAT_ID || ctx?.update?.message?.chat?.id === CHANNEL_CHAT_ID || ctx.update?.callback_query?.message?.chat?.id === ADMIN_CHAT_ID || ctx?.update?.callback_query?.message?.chat?.id === CHANNEL_CHAT_ID || ctx.has('channel_post')){
